@@ -1,0 +1,189 @@
+/* pages/scan/shoppingCar/shoppingCar.wxss */
+.shpTxt{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: left;
+  padding-left: 30rpx;
+  background: #f7f7f7;
+}
+.shpDetail{
+  width: 650rpx;
+  margin: 0 50rpx;
+  overflow: hidden;
+}
+.con_one_car{
+  width: 750rpx;
+  height: 160rpx;
+  border-bottom: 2rpx solid #f3f3f3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+.con_one_car:last-child{
+  border: none;
+}
+.con_img_shp{
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+}
+.img_shoplist{
+  width: 120rpx;
+  height: 120rpx;
+}
+.info_shoplist{
+  display: flex;
+  flex-direction: column;
+  width: 460rpx;
+  height: 120rpx;
+  justify-content: space-between;
+}
+.list_name{
+  width: 450rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.price_num{
+  display: flex;
+  justify-content: space-between;
+}
+.list_price{
+  height: 52rpx;
+  line-height: 52rpx;
+}
+.selnum {
+  width:195rpx;
+  height:52rpx;
+  display:flex;
+  align-items: center
+}
+.add, .cut {
+  width: 50rpx;
+  height:100%;
+  line-height: 52rpx;
+  text-align:center;
+  color:#000;
+  font-weight: 700;
+}
+.dec_gray{
+  color: #ddd;
+}
+.selnum .number {
+  width:85rpx;
+  height:46rpx !important;
+  line-height: 46rpx;
+  text-align:center;
+  background: #f9f9f9;
+}
+.item_top{
+  width: 650rpx;
+  height:160rpx;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  overflow:hidden;
+}
+.del_item{
+  width: 100rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background: rgba(255, 38, 38, 0.918);
+}
+.shp_bott_bgc{
+  width: 100%;
+  height: 16rpx;
+  background: #f7f7f7;
+}
+/* 发票 */
+.item_sum_money{
+  height: 300rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-bottom: 200rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section{
+  display: flex;
+}
+.right_arrow{
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+}
+/* footer */
+.footer{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:200rpx;
+  background:#fff;
+  display: flex;
+  justify-content: space-between;
+  z-index: 99;
+}
+.con_qdAndline{
+  display: flex;
+}
+.con_icon_qd {
+  width:130rpx;
+  height:130rpx;
+  margin: 20rpx 0 50rpx ;
+  border-radius:50%;
+  background:linear-gradient(#f9ba37, #f57b1e);
+  /* box-shadow:0rpx 0rpx 6rpx 6rpx #ffe9ca; */
+}
+.line_left{
+  width: 40rpx;
+  height: 2rpx;
+  margin:85rpx 0 50rpx;
+  background: #f79726;
+}
+.icon_img {
+  display:block;
+  box-sizing:content-box;
+  width:70rpx;
+  height:70rpx;
+  padding:31rpx;
+}
+.con_calcu{
+  display: flex;
+  justify-content: space-between;
+  width: 580rpx;
+  margin-top: 84rpx;
+}
+.sum_money,.sum_num{
+  width: 260rpx;
+  height: 116rpx;
+  line-height: 116rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+.sum_num{
+  color: #fff;
+  background: linear-gradient(to right, #eb6600, #f38325);
+}
+.sum_money{
+  width: 320rpx;
+  border-top: 2rpx solid #f79726;
+  box-sizing: border-box;
+}
+.sum_money_num{
+  font-weight: 700;
+}
+.rmb{
+   font-family: ‘Microsoft YaHei’,STXihei,MingLiu;
+}
+
+
+

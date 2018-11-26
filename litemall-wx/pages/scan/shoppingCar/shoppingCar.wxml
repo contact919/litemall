@@ -1,0 +1,57 @@
+<!--pages/scan/shoppingCar/shoppingCar.wxml-->
+<view class='shoppingCar'>
+  <!-- 商品 -->
+  <view class='product_info'>
+    <view class='shpTxt'>商品</view>
+    <view class='shpDetail'>
+      <!-- 购物车商品列表 -->
+      <view class='con_one_car' style='{{item.topStyle ? item.topStyle : ""}}' wx:for="{{cartGoods}}" wx:key="goodsId">
+        <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-item-index="{{index}}" class='item_top'>
+          <view class='con_img_shp'>
+            <image class='img_shoplist' src="{{item.picUrl}}"></image>
+          </view>
+          <view class='info_shoplist'>
+            <view class='list_name'>{{item.goodsName}}</view>
+            <view class='price_num'>
+              <view class='list_price'>¥ {{item.price}}</view>
+              <view class="selnum">
+                <view class="cut {{item.number <= 1 ? 'dec_gray' : ''}}" bindtap="cutNumber" data-item-index="{{index}}">-</view>
+                <input value='{{item.number}}' class="number" disabled="true" type="number" />
+                <view class="add" bindtap="addNumber" data-item-index="{{index}}">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="del_item" data-item-index="{{index}}" catchtap="delItem">删除</view>
+      </view>
+    </view>
+    <view class='shp_bott_bgc'></view>
+  </view>
+  <!-- 商品金额 -->
+  <view class='item_sum_money'>
+    <view class='item_word'>发票</view>
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}
+        </view>
+      </picker>
+      <image class="right_arrow" src="/static/images/right_arrow.png"></image>
+    </view>
+  </view>
+  <!-- 底部结算 -->
+  <view class='footer'>
+    <view class='con_qdAndline'>    
+      <view class='line_left'></view>
+      <view class='con_icon_qd' bindtap='scanCode'>
+        <image class='icon_img' src='/static/images/icon_qd.png'></image>
+      </view>
+    </view>
+    <view class='con_calcu'>
+      <view class='sum_money'>
+        合计：<span class="rmb">¥</span><span class="sum_money_num">{{cartTotal.goodsAmount}}</span>
+      </view>
+      <view class='sum_num' bindtap="submitOrder">结算<span>({{cartTotal.goodsCount}})</span></view>
+    </view>
+  </view>
+</view>

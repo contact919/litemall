@@ -1,0 +1,66 @@
+<!--pages/scan/appearCode/appearCode.wxml-->
+<view class='appearCode'>
+  <view class='qr_code'>
+    <view class='cd_word'>【请将二维码对准机器屏幕下方离场】</view>
+    <view class='con_cd_img'>
+      <image class='cd_img' src='/static/images/qr_code.png'></image>
+    </view>
+  </view>
+  <view class='con_order'>
+    <view class='order_info'>
+      <view class='dis_lt'>
+        <view class='bgc_line'></view>
+        <view class='order_word'>订单信息</view>
+      </view>
+      <view class='spc_btw'>
+        <view>支付时间:</view>
+        <view>2018-11-22 10:34:52</view>
+      </view>
+      <view class='spc_btw'>
+        <view>交易单号:</view>
+        <view>20181120174631</view>
+      </view>
+      <view class='spc_btw'>
+        <view>门店电话:</view>
+        <view>010-33743168</view>
+      </view>
+    </view>
+    <!-- 分割线 -->
+    <view class='order_list_line'></view>
+
+    <view class='shop_list'>
+      <view class='product'>
+        <view class='pro_name'>绿箭无糖薄荷糖冰柠味</view>
+        <view class='pro_num'>
+          <view>¥ 9.20</view>
+          <view>*2</view>
+        </view>
+      </view>
+      <view class='product'>
+        <view class='pro_name'>绿箭无糖薄荷糖留兰香薄荷味</view>
+        <view class='pro_num'>
+          <view>¥ 9.20</view>
+          <view>*1</view>
+        </view>
+      </view>
+      <view class='product'>
+        <view class='pro_name'>全聚德烤鸭 北京特产礼品 老字号烤鸭含鸭饼鸭酱1380g</view>
+        <view class='pro_num'>
+          <view>¥ 149.00</view>
+          <view>*1</view>
+        </view>
+      </view>
+      <view class='product'>
+        <view class='pro_name'>Apple iPhone XS (A2100) 64GB 黑色</view>
+        <view class='pro_num'>
+          <view>¥ 8699.00</view>
+          <view>*1</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='total'>
+      <view class='fontz'>合计</view>
+      <view class='fontz'>¥ 9982.90</view>
+    </view>
+</view>

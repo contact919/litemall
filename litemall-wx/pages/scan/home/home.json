@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "扫码购",
+  "navigationBarBackgroundColor": "#1876ce",
+  "navigationBarTextStyle": "#ffffff",
+  "backgroundColor": "#ffffff",
+  "enablePullDownRefresh": false
+}

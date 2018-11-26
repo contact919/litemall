@@ -1,0 +1,24 @@
+<!--pages/scan/home/home.wxml-->
+<view>
+  <view class='store_logo'>Range Rover</view>
+  <view>
+    <view class='con_icon_qd' bindtap='scanCode'>
+      <image class='icon_img' src='/static/images/icon_qd.png'></image>
+      <view class='icon_img_intro'>扫商品</view>
+    </view>
+    <view class='manual_input'>手动输入条形码</view>
+  </view>
+  <view class='con_scan_imgs'>
+    <navigator url="/pages/scan/appearCode/appearCode" class='scan_imgs_one'>
+      <image class='scan_leave' src='/static/images/scan_leave.png'></image>
+      <view>待出场</view>
+    </navigator>
+    <view class='scan_imgs_line'></view>
+    <navigator url="/pages/scan/shoppingCar/shoppingCar">
+      <view class='scan_imgs_one'>
+        <image class='scan_pay' src='/static/images/scan_pay.png'></image>
+        <view>待结算</view>
+      </view>
+    </navigator>
+  </view>
+</view>
