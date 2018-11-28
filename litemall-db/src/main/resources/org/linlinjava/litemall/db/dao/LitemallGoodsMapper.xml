@@ -812,4 +812,11 @@
     update litemall_goods set deleted = 1
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getGoodSn" parameterType="java.lang.String" resultMap="BaseResultMap">
+      SELECT id, goods_sn, `name`, category_id, brand_id, gallery, keywords, brief, is_on_sale,
+    sort_order, pic_url, share_url, is_new, is_hot, unit, counter_price, retail_price,
+    add_time, update_time
+    FROM litemall_goods  where goods_sn = #{goodsSn}
+  </select>
 </mapper>

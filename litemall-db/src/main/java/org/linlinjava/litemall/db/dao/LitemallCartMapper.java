@@ -1,9 +1,10 @@
 package org.linlinjava.litemall.db.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.linlinjava.litemall.db.domain.LitemallCart;
 import org.linlinjava.litemall.db.domain.LitemallCartExample;
+
+import java.util.List;
 
 public interface LitemallCartMapper {
     /**
@@ -156,4 +157,11 @@ public interface LitemallCartMapper {
      * @project https://github.com/itfsw/mybatis-generator-plugin
      */
     int logicalDeleteByPrimaryKey(Integer id);
+
+
+
+    LitemallCart queryCartExist(LitemallCartExample example);
+
+
+    Integer queryId(String goodSn);
 }

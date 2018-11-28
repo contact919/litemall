@@ -1,9 +1,10 @@
 package org.linlinjava.litemall.db.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.linlinjava.litemall.db.domain.LitemallGoods;
 import org.linlinjava.litemall.db.domain.LitemallGoodsExample;
+
+import java.util.List;
 
 public interface LitemallGoodsMapper {
     /**
@@ -189,4 +190,8 @@ public interface LitemallGoodsMapper {
      * @project https://github.com/itfsw/mybatis-generator-plugin
      */
     int logicalDeleteByPrimaryKey(Integer id);
+
+
+    LitemallGoods getGoodSn(String sn);
+
 }
