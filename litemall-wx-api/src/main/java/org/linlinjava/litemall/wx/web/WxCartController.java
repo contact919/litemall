@@ -50,11 +50,12 @@ public class WxCartController {
      */
     @GetMapping("index")
     public Object index(@LoginUser Integer userId) {
+        String scan ="1";
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
 
-        List<LitemallCart> cartList = cartService.queryByUid(userId);
+        List<LitemallCart> cartList = cartService.queryByUid(userId,scan);
         Integer goodsCount = 0;
         BigDecimal goodsAmount = new BigDecimal(0.00);
         Integer checkedGoodsCount = 0;
@@ -92,6 +93,7 @@ public class WxCartController {
      */
     @PostMapping("add")
     public Object add(@LoginUser Integer userId, @RequestBody LitemallCart cart) {
+        String scan = "1";
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
@@ -129,6 +131,7 @@ public class WxCartController {
             cart.setSpecifications(product.getSpecifications());
             cart.setUserId(userId);
             cart.setChecked(true);
+            cart.setScan(scan);
             cartService.add(cart);
         } else {
             //取得规格的信息,判断规格库存
@@ -142,7 +145,7 @@ public class WxCartController {
             }
         }
 
-        return goodscount(userId);
+        return goodscount(userId,scan);
     }
 
     /**
@@ -343,13 +346,13 @@ public class WxCartController {
      * @return 购物车商品货品数量
      */
     @GetMapping("goodscount")
-    public Object goodscount(@LoginUser Integer userId) {
+    public Object goodscount(@LoginUser Integer userId,String scan) {
         if (userId == null) {
             return ResponseUtil.ok(0);
         }
 
         int goodsCount = 0;
-        List<LitemallCart> cartList = cartService.queryByUid(userId);
+        List<LitemallCart> cartList = cartService.queryByUid(userId,scan);
         for (LitemallCart cart : cartList) {
             goodsCount += cart.getNumber();
         }
@@ -460,4 +463,96 @@ public class WxCartController {
         data.put("checkedGoodsList", checkedGoodsList);
         return ResponseUtil.ok(data);
     }
+
+
+    /*
+    *   通过扫码的方式加入购物车
+    *
+    */
+
+    @PostMapping("addScan")
+    public Object addScan(String goodsn) {
+        String  scan = "0";
+        Integer  userId = 2;
+        Integer number =1;
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+
+        //判断商品是否可以购买
+        LitemallGoods goods = goodsService.getGoodSn(goodsn);
+        if (goods == null || !goods.getIsOnSale()) {
+            return ResponseUtil.fail(GOODS_UNSHELVE, "商品已下架");
+        }
+
+        //判断购物车中是否存在此规格商品
+        LitemallCart existCart = cartService.queryCartExist(goods.getId(), userId);
+
+        Integer productId = cartService.queryId(goodsn);
+        if (existCart == null) {
+
+            LitemallCart cart= new LitemallCart();
+            cart.setId(null);
+            cart.setGoodsSn(goods.getGoodsSn());
+            cart.setGoodsName((goods.getName()));
+            cart.setPicUrl(goods.getPicUrl());
+            cart.setPrice(goods.getRetailPrice());
+            String[] brief = new String[3];
+            brief[0] = goods.getBrief();
+            cart.setSpecifications(brief);
+            cart.setUserId(userId);
+            cart.setChecked(true);
+            cart.setNumber(number.shortValue());
+            cart.setGoodsId(Integer.valueOf(goodsn));
+            cart.setProductId(productId);
+            cart.setScan(scan);
+            cartService.add(cart);
+        } else {
+            //取得规格的信息,判断规格库存
+            int num = existCart.getNumber() + number;
+            existCart.setNumber((short) num);
+            if (cartService.updateById(existCart) == 0) {
+                return ResponseUtil.updatedDataFailed();
+            }
+        }
+
+        return goodscount(userId,scan);
+    }
+
+    //扫描条形码后显示当前当前用户的购物车
+    @PostMapping("/list")
+    public  Object listScan(){
+        Integer userId = 2;
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+
+        List<LitemallCart> cartList = cartService.queryByUid(userId,"0");
+        Integer goodsCount = 0;
+        BigDecimal goodsAmount = new BigDecimal(0.00);
+        Integer checkedGoodsCount = 0;
+        BigDecimal checkedGoodsAmount = new BigDecimal(0.00);
+        for (LitemallCart cart : cartList) {
+            goodsCount += cart.getNumber();
+            goodsAmount = goodsAmount.add(cart.getPrice().multiply(new BigDecimal(cart.getNumber())));
+            if (cart.getChecked()) {
+                checkedGoodsCount += cart.getNumber();
+                checkedGoodsAmount = checkedGoodsAmount.add(cart.getPrice().multiply(new BigDecimal(cart.getNumber())));
+            }
+        }
+        Map<String, Object> cartTotal = new HashMap<>();
+        cartTotal.put("goodsCount", goodsCount);
+        cartTotal.put("goodsAmount", goodsAmount);
+        cartTotal.put("checkedGoodsCount", checkedGoodsCount);
+        cartTotal.put("checkedGoodsAmount", checkedGoodsAmount);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("cartList", cartList);
+        result.put("cartTotal", cartTotal);
+
+        return ResponseUtil.ok(result);
+
+    }
+
+
 }

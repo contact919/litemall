@@ -33,9 +33,9 @@ public class LitemallCartService {
         return cartMapper.updateByPrimaryKeySelective(cart);
     }
 
-    public List<LitemallCart> queryByUid(int userId) {
+    public List<LitemallCart> queryByUid(int userId,String scan) {
         LitemallCartExample example = new LitemallCartExample();
-        example.or().andUserIdEqualTo(userId).andDeletedEqualTo(false);
+        example.or().andUserIdEqualTo(userId).andDeletedEqualTo(false).andUserScanEqualTo(scan);
         return cartMapper.selectByExample(example);
     }
 
@@ -117,4 +117,24 @@ public class LitemallCartService {
         example.or().andGoodsIdEqualTo(goodsId).andCheckedEqualTo(true);
         return cartMapper.countByExample(example) != 0;
     }
+
+
+    /*
+    *  通过扫描条形码加入购物车 判断购物车是否已经存在该商品
+    */
+
+    public LitemallCart queryCartExist(Integer goodsId, Integer userId) {
+        LitemallCartExample example = new LitemallCartExample();
+        example.or().andGoodsIdEqualTo(goodsId).andUserIdEqualTo(userId).andDeletedEqualTo(false);
+        return cartMapper.queryCartExist(example);
+    }
+
+    /*
+     * 通过扫描条形码获得litemall_goods_product表中的id值
+    */
+
+    public  Integer queryId(String goodSn){
+       return cartMapper.queryId(goodSn);
+    }
+
 }

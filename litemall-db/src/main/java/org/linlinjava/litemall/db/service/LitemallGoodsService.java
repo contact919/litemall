@@ -297,4 +297,11 @@ public class LitemallGoodsService {
         example.or().andNameEqualTo(name).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
         return goodsMapper.countByExample(example) != 0;
     }
+
+   public  LitemallGoods getGoodSn(String sn){
+
+       LitemallGoods goods = goodsMapper.getGoodSn(sn);
+       return  goods;
+   }
+
 }

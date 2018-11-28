@@ -12,10 +12,7 @@ import org.linlinjava.litemall.db.service.*;
 import org.linlinjava.litemall.wx.annotation.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -299,6 +296,18 @@ public class WxGoodsController {
         Map<String, Object> data = new HashMap<>();
         data.put("goodsCount", goodsCount);
         return ResponseUtil.ok(data);
+    }
+
+
+    /*
+    *     根据商品的条形码编号获取商品的具体信息
+    */
+   @PostMapping("/goodsn")
+    public Object getGoodSn(String sn){
+        LitemallGoods goodList = goodsService.getGoodSn(sn);
+        Map<String, Object> data = new HashMap<>();
+        data.put("goodsCount", goodList);
+        return   ResponseUtil.ok(data);
     }
 
 }

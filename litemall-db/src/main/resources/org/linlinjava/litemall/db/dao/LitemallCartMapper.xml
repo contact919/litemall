@@ -20,6 +20,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="scan" jdbcType="VARCHAR" property="scan" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -321,6 +322,9 @@
       <if test="deleted != null">
         deleted,
       </if>
+      <if test="scan != null">
+        scan,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -361,6 +365,9 @@
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
+      </if>
+      <if test="scan != null">
+        #{scan,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -586,4 +593,24 @@
     update litemall_cart set deleted = 1
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryCartExist" parameterType="org.linlinjava.litemall.db.domain.LitemallCartExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from litemall_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+
+
+  <select id="queryId" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT  id  from litemall_goods_product where goods_id = #{goodSn}
+  </select>
+
+
 </mapper>
