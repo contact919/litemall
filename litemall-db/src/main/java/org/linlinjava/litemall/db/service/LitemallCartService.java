@@ -40,9 +40,9 @@ public class LitemallCartService {
     }
 
 
-    public List<LitemallCart> queryByUidAndChecked(Integer userId) {
+    public List<LitemallCart> queryByUidAndChecked(Integer userId,String scan) {
         LitemallCartExample example = new LitemallCartExample();
-        example.or().andUserIdEqualTo(userId).andCheckedEqualTo(true).andDeletedEqualTo(false);
+        example.or().andUserIdEqualTo(userId).andCheckedEqualTo(true).andDeletedEqualTo(false).andUserScanEqualTo(scan);
         return cartMapper.selectByExample(example);
     }
 

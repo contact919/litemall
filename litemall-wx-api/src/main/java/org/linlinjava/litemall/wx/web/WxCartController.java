@@ -375,6 +375,7 @@ public class WxCartController {
      */
     @GetMapping("checkout")
     public Object checkout(@LoginUser Integer userId, Integer cartId, Integer addressId, Integer couponId, Integer grouponRulesId) {
+        String scan = "1";
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
@@ -415,7 +416,7 @@ public class WxCartController {
         // 商品价格
         List<LitemallCart> checkedGoodsList = null;
         if (cartId == null || cartId.equals(0)) {
-            checkedGoodsList = cartService.queryByUidAndChecked(userId);
+            checkedGoodsList = cartService.queryByUidAndChecked(userId,scan);
         } else {
             LitemallCart cart = cartService.findById(cartId);
             if (cart == null) {
@@ -497,7 +498,7 @@ public class WxCartController {
             cart.setGoodsName((goods.getName()));
             cart.setPicUrl(goods.getPicUrl());
             cart.setPrice(goods.getRetailPrice());
-            String[] brief = new String[3];
+            String[] brief = new String[1];
             brief[0] = goods.getBrief();
             cart.setSpecifications(brief);
             cart.setUserId(userId);
