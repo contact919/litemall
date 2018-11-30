@@ -251,6 +251,7 @@ public class WxOrderController {
      */
     @PostMapping("submit")
     public Object submit(@LoginUser Integer userId, @RequestBody String body) {
+        String scan = "1";
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
@@ -301,7 +302,7 @@ public class WxOrderController {
         // 货品价格
         List<LitemallCart> checkedGoodsList = null;
         if (cartId.equals(0)) {
-            checkedGoodsList = cartService.queryByUidAndChecked(userId);
+            checkedGoodsList = cartService.queryByUidAndChecked(userId,scan);
         } else {
             LitemallCart cart = cartService.findById(cartId);
             checkedGoodsList = new ArrayList<>(1);
